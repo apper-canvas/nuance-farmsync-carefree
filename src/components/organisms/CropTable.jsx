@@ -70,11 +70,31 @@ const CropTable = ({ crops, farms, onEdit, onDelete }) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <StatusBadge status={crop.status} type="crop" />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {format(new Date(crop.plantingDate), "MMM d, yyyy")}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {(() => {
+                    const date = crop.planting_date_c;
+                    if (!date || date === '' || date === null || date === undefined) {
+                      return <span className="text-gray-400">No date set</span>;
+                    }
+                    const dateObj = new Date(date);
+                    if (isNaN(dateObj.getTime())) {
+                      return <span className="text-gray-400">Invalid date</span>;
+                    }
+                    return format(dateObj, "MMM d, yyyy");
+                  })()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {format(new Date(crop.expectedHarvest), "MMM d, yyyy")}
+                  {(() => {
+                    const date = crop.expected_harvest_c;
+                    if (!date || date === '' || date === null || date === undefined) {
+                      return <span className="text-gray-400">No date set</span>;
+                    }
+                    const dateObj = new Date(date);
+                    if (isNaN(dateObj.getTime())) {
+                      return <span className="text-gray-400">Invalid date</span>;
+                    }
+                    return format(dateObj, "MMM d, yyyy");
+                  })()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {crop.quantity} {crop.unit}
