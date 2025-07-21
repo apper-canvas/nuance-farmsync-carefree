@@ -10,8 +10,8 @@ const TransactionList = ({ transactions, farms, onEdit, onDelete }) => {
     return farm ? farm.name : "Unknown Farm";
   };
 
-  const sortedTransactions = [...transactions].sort((a, b) => 
-    new Date(b.date) - new Date(a.date)
+const sortedTransactions = [...transactions].sort((a, b) => 
+    new Date(b.date_c) - new Date(a.date_c)
   );
 
   return (
@@ -71,14 +71,14 @@ const TransactionList = ({ transactions, farms, onEdit, onDelete }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {getFarmName(transaction.farmId)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {format(new Date(transaction.date), "MMM d, yyyy")}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {transaction.date_c ? format(new Date(transaction.date_c), "MMM d, yyyy") : "N/A"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
                   <span className={`text-sm font-medium ${
-                    transaction.type === "income" ? "text-green-600" : "text-red-600"
+                    transaction.type_c === "income" ? "text-green-600" : "text-red-600"
                   }`}>
-                    {transaction.type === "income" ? "+" : "-"}
+                    {transaction.type_c === "income" ? "+" : "-"}
                     ${transaction.amount.toLocaleString()}
                   </span>
                 </td>
