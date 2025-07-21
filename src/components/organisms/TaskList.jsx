@@ -76,9 +76,13 @@ const TaskList = ({ tasks, farms, crops, onComplete, onEdit, onDelete }) => {
                     <ApperIcon name="Wheat" className="w-3 h-3 mr-1" />
                     {getCropName(task.cropId)}
                   </span>
-                  <span className="flex items-center">
+<span className="flex items-center">
                     <ApperIcon name="Calendar" className="w-3 h-3 mr-1" />
-                    Due {format(new Date(task.dueDate), "MMM d, yyyy")}
+                    {task.due_date_c ? (
+                      `Due ${format(new Date(task.due_date_c), "MMM d, yyyy")}`
+                    ) : (
+                      "No due date"
+                    )}
                   </span>
                 </div>
               </div>
