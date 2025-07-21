@@ -1,54 +1,267 @@
-import transactionsData from "@/services/mockData/transactions.json";
+import { toast } from 'react-toastify';
 
-let transactions = [...transactionsData];
-
-const delay = () => new Promise(resolve => setTimeout(resolve, 300));
+const tableName = 'transaction_c';
 
 export const transactionService = {
   async getAll() {
-    await delay();
-    return [...transactions];
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "type_c" } },
+          { field: { Name: "category_c" } },
+          { field: { Name: "amount_c" } },
+          { field: { Name: "date_c" } },
+          { field: { Name: "description_c" } },
+          { field: { Name: "farm_id_c" } }
+        ]
+      };
+
+      const response = await apperClient.fetchRecords(tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
+      }
+
+      return response.data || [];
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching transactions:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return [];
+    }
   },
 
   async getById(id) {
-    await delay();
-    return transactions.find(transaction => transaction.Id === parseInt(id));
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "type_c" } },
+          { field: { Name: "category_c" } },
+          { field: { Name: "amount_c" } },
+          { field: { Name: "date_c" } },
+          { field: { Name: "description_c" } },
+          { field: { Name: "farm_id_c" } }
+        ]
+      };
+
+      const response = await apperClient.getRecordById(tableName, parseInt(id), params);
+      return response.data;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching transaction with ID ${id}:`, error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
+    }
   },
 
   async getByFarmId(farmId) {
-    await delay();
-    return transactions.filter(transaction => transaction.farmId === parseInt(farmId));
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "type_c" } },
+          { field: { Name: "category_c" } },
+          { field: { Name: "amount_c" } },
+          { field: { Name: "date_c" } },
+          { field: { Name: "description_c" } },
+          { field: { Name: "farm_id_c" } }
+        ],
+        where: [
+          {
+            FieldName: "farm_id_c",
+            Operator: "EqualTo",
+            Values: [parseInt(farmId)]
+          }
+        ]
+      };
+
+      const response = await apperClient.fetchRecords(tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        return [];
+      }
+
+      return response.data || [];
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching transactions by farm ID:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return [];
+    }
   },
 
   async create(transactionData) {
-    await delay();
-    const newTransaction = {
-      Id: Math.max(...transactions.map(t => t.Id), 0) + 1,
-      ...transactionData,
-      farmId: parseInt(transactionData.farmId),
-      amount: parseFloat(transactionData.amount)
-    };
-    transactions.push(newTransaction);
-    return newTransaction;
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [{
+          Name: `${transactionData.type} - ${transactionData.category}`,
+          type_c: transactionData.type,
+          category_c: transactionData.category,
+          amount_c: parseFloat(transactionData.amount),
+          date_c: transactionData.date,
+          description_c: transactionData.description,
+          farm_id_c: parseInt(transactionData.farmId)
+        }]
+      };
+
+      const response = await apperClient.createRecord(tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const failedRecords = response.results.filter(result => !result.success);
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create transaction ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+          return null;
+        }
+        return response.results[0].data;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating transaction:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
+    }
   },
 
   async update(id, transactionData) {
-    await delay();
-    const index = transactions.findIndex(transaction => transaction.Id === parseInt(id));
-    if (index !== -1) {
-      transactions[index] = { ...transactions[index], ...transactionData };
-      return transactions[index];
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          Name: `${transactionData.type} - ${transactionData.category}`,
+          type_c: transactionData.type,
+          category_c: transactionData.category,
+          amount_c: parseFloat(transactionData.amount),
+          date_c: transactionData.date,
+          description_c: transactionData.description,
+          farm_id_c: parseInt(transactionData.farmId)
+        }]
+      };
+
+      const response = await apperClient.updateRecord(tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const failedRecords = response.results.filter(result => !result.success);
+        if (failedRecords.length > 0) {
+          console.error(`Failed to update transaction ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+          return null;
+        }
+        return response.results[0].data;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating transaction:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return null;
     }
-    throw new Error("Transaction not found");
   },
 
   async delete(id) {
-    await delay();
-    const index = transactions.findIndex(transaction => transaction.Id === parseInt(id));
-    if (index !== -1) {
-      const deleted = transactions.splice(index, 1)[0];
-      return deleted;
+    try {
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await apperClient.deleteRecord(tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return false;
+      }
+
+      if (response.results) {
+        const failedRecords = response.results.filter(result => !result.success);
+        if (failedRecords.length > 0) {
+          console.error(`Failed to delete transaction ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          failedRecords.forEach(record => {
+            if (record.message) toast.error(record.message);
+          });
+          return false;
+        }
+        return true;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting transaction:", error?.response?.data?.message);
+      } else {
+        console.error(error.message);
+      }
+      return false;
     }
-    throw new Error("Transaction not found");
   }
 };
