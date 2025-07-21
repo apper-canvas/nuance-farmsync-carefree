@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "farmId": 1,
+    "cropId": 1,
+    "title": "Water tomato plants",
+    "description": "Deep watering of tomato field",
+    "dueDate": "2024-12-16",
+    "completed": false,
+    "completedDate": null,
+    "priority": "High"
+  },
+  {
+    "Id": 2,
+    "farmId": 1,
+    "cropId": 2,
+    "title": "Apply nitrogen fertilizer",
+    "description": "Apply 50lbs/acre nitrogen fertilizer to corn field",
+    "dueDate": "2024-12-18",
+    "completed": false,
+    "completedDate": null,
+    "priority": "Medium"
+  },
+  {
+    "Id": 3,
+    "farmId": 2,
+    "cropId": 3,
+    "title": "Prune almond trees",
+    "description": "Annual pruning of almond orchard",
+    "dueDate": "2024-12-20",
+    "completed": false,
+    "completedDate": null,
+    "priority": "Low"
+  },
+  {
+    "Id": 4,
+    "farmId": 2,
+    "cropId": 4,
+    "title": "Pest control spray",
+    "description": "Apply organic pest control to apple trees",
+    "dueDate": "2024-12-17",
+    "completed": false,
+    "completedDate": null,
+    "priority": "High"
+  },
+  {
+    "Id": 5,
+    "farmId": 3,
+    "cropId": 5,
+    "title": "Check irrigation system",
+    "description": "Inspect and maintain wheat field irrigation",
+    "dueDate": "2024-12-15",
+    "completed": true,
+    "completedDate": "2024-12-14",
+    "priority": "Medium"
+  }
+]

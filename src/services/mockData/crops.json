@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "farmId": 1,
+    "cropType": "Tomatoes",
+    "plantingDate": "2024-03-15",
+    "expectedHarvest": "2024-07-15",
+    "quantity": 2500,
+    "unit": "plants",
+    "status": "Growing",
+    "location": "North Field"
+  },
+  {
+    "Id": 2,
+    "farmId": 1,
+    "cropType": "Corn",
+    "plantingDate": "2024-04-01",
+    "expectedHarvest": "2024-08-15",
+    "quantity": 15,
+    "unit": "acres",
+    "status": "Planted",
+    "location": "East Field"
+  },
+  {
+    "Id": 3,
+    "farmId": 2,
+    "cropType": "Almonds",
+    "plantingDate": "2024-02-10",
+    "expectedHarvest": "2024-09-30",
+    "quantity": 45,
+    "unit": "trees",
+    "status": "Growing",
+    "location": "Orchard Block A"
+  },
+  {
+    "Id": 4,
+    "farmId": 2,
+    "cropType": "Apples",
+    "plantingDate": "2024-03-01",
+    "expectedHarvest": "2024-09-01",
+    "quantity": 120,
+    "unit": "trees",
+    "status": "Flowering",
+    "location": "Orchard Block B"
+  },
+  {
+    "Id": 5,
+    "farmId": 3,
+    "cropType": "Wheat",
+    "plantingDate": "2024-02-20",
+    "expectedHarvest": "2024-07-01",
+    "quantity": 85,
+    "unit": "acres",
+    "status": "Growing",
+    "location": "West Section"
+  }
+]

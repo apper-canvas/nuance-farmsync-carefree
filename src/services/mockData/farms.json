@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "name": "Green Valley Farm",
+    "location": "Riverside County, CA",
+    "size": 125.5,
+    "sizeUnit": "acres",
+    "createdAt": "2024-01-15"
+  },
+  {
+    "Id": 2,
+    "name": "Sunrise Orchards",
+    "location": "Fresno County, CA", 
+    "size": 87.2,
+    "sizeUnit": "acres",
+    "createdAt": "2024-02-03"
+  },
+  {
+    "Id": 3,
+    "name": "Heritage Fields",
+    "location": "Kern County, CA",
+    "size": 203.8,
+    "sizeUnit": "acres",
+    "createdAt": "2024-01-28"
+  }
+]

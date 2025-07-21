@@ -1,0 +1,65 @@
+[
+  {
+    "Id": 1,
+    "farmId": 1,
+    "type": "expense",
+    "category": "Seeds",
+    "amount": 450.75,
+    "date": "2024-03-14",
+    "description": "Tomato seeds for spring planting"
+  },
+  {
+    "Id": 2,
+    "farmId": 1,
+    "type": "expense",
+    "category": "Fertilizer",
+    "amount": 325.50,
+    "date": "2024-03-20",
+    "description": "Organic compost and nitrogen fertilizer"
+  },
+  {
+    "Id": 3,
+    "farmId": 1,
+    "type": "income",
+    "category": "Crop Sales",
+    "amount": 2850.00,
+    "date": "2024-11-15",
+    "description": "Tomato harvest sales to local market"
+  },
+  {
+    "Id": 4,
+    "farmId": 2,
+    "type": "expense",
+    "category": "Equipment",
+    "amount": 1250.00,
+    "date": "2024-02-28",
+    "description": "New irrigation sprinklers for orchard"
+  },
+  {
+    "Id": 5,
+    "farmId": 2,
+    "type": "income",
+    "category": "Crop Sales",
+    "amount": 4200.00,
+    "date": "2024-10-05",
+    "description": "Almond harvest direct to processor"
+  },
+  {
+    "Id": 6,
+    "farmId": 3,
+    "type": "expense",
+    "category": "Fuel",
+    "amount": 185.25,
+    "date": "2024-04-10",
+    "description": "Diesel fuel for tractors"
+  },
+  {
+    "Id": 7,
+    "farmId": 3,
+    "type": "income",
+    "category": "Crop Sales",
+    "amount": 3750.00,
+    "date": "2024-07-20",
+    "description": "Wheat harvest to grain elevator"
+  }
+]
