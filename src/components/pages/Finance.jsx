@@ -75,15 +75,15 @@ const Finance = () => {
     }
   };
 
-  const handleEdit = (transaction) => {
+const handleEdit = (transaction) => {
     setEditingTransaction(transaction);
     setFormData({
-      farmId: transaction.farmId.toString(),
-      type: transaction.type,
-      category: transaction.category,
-      amount: transaction.amount.toString(),
-      date: transaction.date,
-      description: transaction.description
+      farmId: transaction.farm_id_c.toString(),
+      type: transaction.type_c,
+      category: transaction.category_c,
+      amount: transaction.amount_c.toString(),
+      date: transaction.date_c,
+      description: transaction.description_c
     });
     setShowForm(true);
   };
@@ -113,30 +113,29 @@ const Finance = () => {
     setShowForm(false);
   };
 
-  // Calculate financial stats
+// Calculate financial stats
   const totalIncome = transactions
-    .filter(t => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
+    .filter(t => t.type_c === "income")
+    .reduce((sum, t) => sum + t.amount_c, 0);
   
   const totalExpenses = transactions
-    .filter(t => t.type === "expense")
-    .reduce((sum, t) => sum + t.amount, 0);
+    .filter(t => t.type_c === "expense")
+    .reduce((sum, t) => sum + t.amount_c, 0);
   
   const netProfit = totalIncome - totalExpenses;
 
   // Monthly stats
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
-  const monthlyTransactions = transactions.filter(t => {
-    const transactionDate = new Date(t.date);
+const monthlyTransactions = transactions.filter(t => {
+    const transactionDate = new Date(t.date_c);
     return transactionDate.getMonth() === currentMonth && 
            transactionDate.getFullYear() === currentYear;
   });
   
   const monthlyIncome = monthlyTransactions
-    .filter(t => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
-
+    .filter(t => t.type_c === "income")
+    .reduce((sum, t) => sum + t.amount_c, 0);
   if (loading) return <Loading type="stats" />;
   if (error) return <Error message={error} onRetry={loadData} />;
 
@@ -235,9 +234,9 @@ const Finance = () => {
                 required
               >
                 <option value="">Select a farm</option>
-                {farms.map((farm) => (
+{farms.map((farm) => (
                   <option key={farm.Id} value={farm.Id}>
-                    {farm.name}
+                    {farm.Name}
                   </option>
                 ))}
               </FormField>

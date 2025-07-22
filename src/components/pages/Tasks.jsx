@@ -81,14 +81,14 @@ const Tasks = () => {
   };
 
   const handleEdit = (task) => {
-    setEditingTask(task);
+setEditingTask(task);
     setFormData({
-      farmId: task.farmId.toString(),
-      cropId: task.cropId ? task.cropId.toString() : "",
-      title: task.title,
-      description: task.description,
-      dueDate: task.dueDate,
-      priority: task.priority
+      farmId: task.farm_id_c.toString(),
+      cropId: task.crop_id_c ? task.crop_id_c.toString() : "",
+      title: task.title_c,
+      description: task.description_c,
+      dueDate: task.due_date_c,
+      priority: task.priority_c
     });
     setShowForm(true);
   };
@@ -118,14 +118,14 @@ const Tasks = () => {
     setShowForm(false);
   };
 
-  const filteredTasks = tasks.filter(task => {
-    if (filterStatus === "pending") return !task.completed;
-    if (filterStatus === "completed") return task.completed;
+const filteredTasks = tasks.filter(task => {
+    if (filterStatus === "pending") return !task.completed_c;
+    if (filterStatus === "completed") return task.completed_c;
     return true;
   });
 
-  const farmCrops = crops.filter(crop => 
-    formData.farmId ? crop.farmId === parseInt(formData.farmId) : false
+const farmCrops = crops.filter(crop => 
+    formData.farmId ? crop.farm_id_c === parseInt(formData.farmId) : false
   );
 
   if (loading) return <Loading />;
@@ -213,8 +213,8 @@ const Tasks = () => {
               >
                 <option value="">Select a farm</option>
                 {farms.map((farm) => (
-                  <option key={farm.Id} value={farm.Id}>
-                    {farm.name}
+<option key={farm.Id} value={farm.Id}>
+                    {farm.Name}
                   </option>
                 ))}
               </FormField>
@@ -227,9 +227,9 @@ const Tasks = () => {
                 onChange={(e) => setFormData({ ...formData, cropId: e.target.value })}
               >
                 <option value="">General task</option>
-                {farmCrops.map((crop) => (
+{farmCrops.map((crop) => (
                   <option key={crop.Id} value={crop.Id}>
-                    {crop.cropType} - {crop.location}
+                    {crop.crop_type_c} - {crop.location_c}
                   </option>
                 ))}
               </FormField>

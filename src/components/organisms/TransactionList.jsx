@@ -48,38 +48,38 @@ const sortedTransactions = [...transactions].sort((a, b) =>
               >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      transaction.type === "income" 
+<div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      transaction.type_c === "income" 
                         ? "bg-gradient-to-r from-green-400 to-green-500" 
                         : "bg-gradient-to-r from-red-400 to-red-500"
                     }`}>
-                      <ApperIcon 
-                        name={transaction.type === "income" ? "TrendingUp" : "TrendingDown"} 
+<ApperIcon 
+                        name={transaction.type_c === "income" ? "TrendingUp" : "TrendingDown"} 
                         className="w-5 h-5 text-white" 
                       />
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900">
-                        {transaction.category}
+                        {transaction.category_c}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {transaction.description}
+                        {transaction.description_c}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {getFarmName(transaction.farmId)}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {getFarmName(transaction.farm_id_c)}
                 </td>
 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {transaction.date_c ? format(new Date(transaction.date_c), "MMM d, yyyy") : "N/A"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right">
+<td className="px-6 py-4 whitespace-nowrap text-right">
                   <span className={`text-sm font-medium ${
                     transaction.type_c === "income" ? "text-green-600" : "text-red-600"
                   }`}>
                     {transaction.type_c === "income" ? "+" : "-"}
-                    ${transaction.amount.toLocaleString()}
+                    ${transaction.amount_c.toLocaleString()}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

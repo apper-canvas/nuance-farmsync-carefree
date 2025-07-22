@@ -64,25 +64,25 @@ const Dashboard = () => {
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadDashboardData} />;
 
-  const activeCrops = data.crops.filter(crop => crop.status !== "Harvested").length;
-  const pendingTasks = data.tasks.filter(task => !task.completed).length;
-  const completedTasks = data.tasks.filter(task => task.completed).length;
+const activeCrops = data.crops.filter(crop => crop.status_c !== "Harvested").length;
+  const pendingTasks = data.tasks.filter(task => !task.completed_c).length;
+  const completedTasks = data.tasks.filter(task => task.completed_c).length;
   
-  const currentMonth = new Date().getMonth();
+const currentMonth = new Date().getMonth();
   const monthlyTransactions = data.transactions.filter(t => 
-    new Date(t.date).getMonth() === currentMonth
+    new Date(t.date_c).getMonth() === currentMonth
   );
   const monthlyIncome = monthlyTransactions
-    .filter(t => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
+    .filter(t => t.type_c === "income")
+    .reduce((sum, t) => sum + t.amount_c, 0);
   const monthlyExpenses = monthlyTransactions
-    .filter(t => t.type === "expense")
-    .reduce((sum, t) => sum + t.amount, 0);
+    .filter(t => t.type_c === "expense")
+    .reduce((sum, t) => sum + t.amount_c, 0);
   const monthlyProfit = monthlyIncome - monthlyExpenses;
 
-  const upcomingTasks = data.tasks
-    .filter(task => !task.completed)
-    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+const upcomingTasks = data.tasks
+    .filter(task => !task.completed_c)
+    .sort((a, b) => new Date(a.due_date_c) - new Date(b.due_date_c))
     .slice(0, 5);
 
   return (

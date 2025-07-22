@@ -73,17 +73,17 @@ const Crops = () => {
     }
   };
 
-  const handleEdit = (crop) => {
+const handleEdit = (crop) => {
     setEditingCrop(crop);
     setFormData({
-      farmId: crop.farmId.toString(),
-      cropType: crop.cropType,
-      plantingDate: crop.plantingDate,
-      expectedHarvest: crop.expectedHarvest,
-      quantity: crop.quantity.toString(),
-      unit: crop.unit,
-      status: crop.status,
-      location: crop.location
+      farmId: crop.farm_id_c.toString(),
+      cropType: crop.crop_type_c,
+      plantingDate: crop.planting_date_c,
+      expectedHarvest: crop.expected_harvest_c,
+      quantity: crop.quantity_c.toString(),
+      unit: crop.unit_c,
+      status: crop.status_c,
+      location: crop.location_c
     });
     setShowForm(true);
   };
@@ -179,9 +179,9 @@ className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center
                 required
               >
                 <option value="">Select a farm</option>
-                {farms.map((farm) => (
+{farms.map((farm) => (
                   <option key={farm.Id} value={farm.Id}>
-                    {farm.name}
+                    {farm.Name}
                   </option>
                 ))}
               </FormField>

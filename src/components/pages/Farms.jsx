@@ -69,13 +69,13 @@ const Farms = () => {
     }
   };
 
-  const handleEdit = (farm) => {
+const handleEdit = (farm) => {
     setEditingFarm(farm);
     setFormData({
-      name: farm.name,
-      location: farm.location,
-      size: farm.size.toString(),
-      sizeUnit: farm.sizeUnit
+      name: farm.Name,
+      location: farm.location_c,
+      size: farm.size_c.toString(),
+      sizeUnit: farm.size_unit_c
     });
     setShowForm(true);
   };
@@ -103,8 +103,8 @@ const Farms = () => {
     setShowForm(false);
   };
 
-  const getCropsCount = (farmId) => {
-    return crops.filter(crop => crop.farmId === farmId).length;
+const getCropsCount = (farmId) => {
+    return crops.filter(crop => crop.farm_id_c === farmId).length;
   };
 
   if (loading) return <Loading type="cards" />;

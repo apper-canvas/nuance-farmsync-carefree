@@ -17,10 +17,10 @@ const FarmCard = ({ farm, cropsCount = 0, onEdit, onDelete }) => {
                 className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
                 <ApperIcon name="MapPin" className="w-6 h-6 text-white" />
                 <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-gray-900 font-display">
+<h3 className="text-lg font-semibold text-gray-900 font-display">
                         {farm.Name}
                     </h3>
-                    <p className="text-sm text-gray-600">{farm.location}</p>
+                    <p className="text-sm text-gray-600">{farm.location_c}</p>
                 </div>
             </div>
             <div className="flex space-x-2">
@@ -39,10 +39,10 @@ const FarmCard = ({ farm, cropsCount = 0, onEdit, onDelete }) => {
             </div>
             <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="text-center p-3 bg-primary-50 rounded-lg">
-                    <p className="text-2xl font-bold text-primary-600 font-display">
-                        {farm.size}
+<p className="text-2xl font-bold text-primary-600 font-display">
+                        {farm.size_c}
                     </p>
-                    <p className="text-xs text-gray-600">{farm.sizeUnit}</p>
+                    <p className="text-xs text-gray-600">{farm.size_unit_c}</p>
                 </div>
                 <div className="text-center p-3 bg-secondary-50 rounded-lg">
                     <p className="text-2xl font-bold text-secondary-600 font-display">
@@ -51,8 +51,8 @@ const FarmCard = ({ farm, cropsCount = 0, onEdit, onDelete }) => {
                     <p className="text-xs text-gray-600">Active Crops</p>
                 </div>
             </div>
-            <div className="flex items-center text-xs text-gray-500">
-                <ApperIcon name="Calendar" className="w-3 h-3 mr-1" />Created {new Date(farm.createdAt).toLocaleDateString()}
+<div className="flex items-center text-xs text-gray-500">
+                <ApperIcon name="Calendar" className="w-3 h-3 mr-1" />Created {new Date(farm.created_at_c).toLocaleDateString()}
             </div>
         </div></div></motion.div>
   );

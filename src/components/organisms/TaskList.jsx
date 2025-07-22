@@ -11,11 +11,10 @@ const TaskList = ({ tasks, farms, crops, onComplete, onEdit, onDelete }) => {
     return farm ? farm.Name : "Unknown Farm";
   };
 
-  const getCropName = (cropId) => {
+const getCropName = (cropId) => {
     const crop = crops.find(c => c.Id === cropId);
-    return crop ? crop.cropType : "General Task";
+    return crop ? crop.crop_type_c : "General Task";
   };
-
   const getPriorityColor = (priority) => {
     switch (priority?.toLowerCase()) {
       case "high":
@@ -29,13 +28,12 @@ const TaskList = ({ tasks, farms, crops, onComplete, onEdit, onDelete }) => {
     }
   };
 
-  const sortedTasks = [...tasks].sort((a, b) => {
-    if (a.completed !== b.completed) {
-      return a.completed ? 1 : -1;
+const sortedTasks = [...tasks].sort((a, b) => {
+    if (a.completed_c !== b.completed_c) {
+      return a.completed_c ? 1 : -1;
     }
-    return new Date(a.dueDate) - new Date(b.dueDate);
+    return new Date(a.due_date_c) - new Date(b.due_date_c);
   });
-
   return (
     <div className="space-y-3">
       {sortedTasks.map((task, index) => (
@@ -44,37 +42,37 @@ const TaskList = ({ tasks, farms, crops, onComplete, onEdit, onDelete }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className={`card p-4 ${task.completed ? "opacity-75 bg-gray-50" : ""}`}
+className={`card p-4 ${task.completed_c ? "opacity-75 bg-gray-50" : ""}`}
         >
           <div className="flex items-start justify-between">
             <div className="flex items-start space-x-4 flex-1">
               <div className="flex items-center pt-1">
-                <input
+<input
                   type="checkbox"
-                  checked={task.completed}
-                  onChange={() => !task.completed && onComplete(task.Id)}
+                  checked={task.completed_c}
+                  onChange={() => !task.completed_c && onComplete(task.Id)}
                   className="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
                 />
               </div>
               
               <div className="flex-1 min-w-0">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h4 className={`font-medium ${task.completed ? "line-through text-gray-500" : "text-gray-900"}`}>
-                    {task.title}
+<h4 className={`font-medium ${task.completed_c ? "line-through text-gray-500" : "text-gray-900"}`}>
+                    {task.title_c}
                   </h4>
-                  <StatusBadge status={task.priority} type="priority" />
+                  <StatusBadge status={task.priority_c} type="priority" />
                 </div>
                 
-                <p className="text-sm text-gray-600 mb-2">{task.description}</p>
+                <p className="text-sm text-gray-600 mb-2">{task.description_c}</p>
                 
                 <div className="flex items-center space-x-4 text-xs text-gray-500">
                   <span className="flex items-center">
-                    <ApperIcon name="MapPin" className="w-3 h-3 mr-1" />
-                    {getFarmName(task.farmId)}
+<ApperIcon name="MapPin" className="w-3 h-3 mr-1" />
+                    {getFarmName(task.farm_id_c)}
                   </span>
                   <span className="flex items-center">
                     <ApperIcon name="Wheat" className="w-3 h-3 mr-1" />
-                    {getCropName(task.cropId)}
+                    {getCropName(task.crop_id_c)}
                   </span>
 <span className="flex items-center">
                     <ApperIcon name="Calendar" className="w-3 h-3 mr-1" />
@@ -88,7 +86,7 @@ const TaskList = ({ tasks, farms, crops, onComplete, onEdit, onDelete }) => {
               </div>
             </div>
             
-            {!task.completed && (
+{!task.completed_c && (
               <div className="flex space-x-2 ml-4">
                 <Button
                   variant="ghost"

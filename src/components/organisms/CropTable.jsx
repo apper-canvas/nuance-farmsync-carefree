@@ -55,17 +55,17 @@ const CropTable = ({ crops, farms, onEdit, onDelete }) => {
                       <ApperIcon name="Wheat" className="w-5 h-5 text-white" />
                     </div>
                     <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {crop.cropType}
+<div className="text-sm font-medium text-gray-900">
+                        {crop.crop_type_c}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {crop.location}
+                        {crop.location_c}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {getFarmName(crop.farmId)}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {getFarmName(crop.farm_id_c)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <StatusBadge status={crop.status} type="crop" />
@@ -96,8 +96,8 @@ const CropTable = ({ crops, farms, onEdit, onDelete }) => {
                     return format(dateObj, "MMM d, yyyy");
                   })()}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {crop.quantity} {crop.unit}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {crop.quantity_c} {crop.unit_c}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex justify-end space-x-2">
