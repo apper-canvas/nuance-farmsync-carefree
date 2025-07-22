@@ -8,7 +8,7 @@ import { format } from "date-fns";
 const CropTable = ({ crops, farms, onEdit, onDelete }) => {
   const getFarmName = (farmId) => {
     const farm = farms.find(f => f.Id === farmId);
-    return farm ? farm.name : "Unknown Farm";
+    return farm ? farm.Name : "Unknown Farm";
   };
 
   return (

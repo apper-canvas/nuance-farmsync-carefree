@@ -7,10 +7,10 @@ import { format } from "date-fns";
 const TransactionList = ({ transactions, farms, onEdit, onDelete }) => {
   const getFarmName = (farmId) => {
     const farm = farms.find(f => f.Id === farmId);
-    return farm ? farm.name : "Unknown Farm";
+    return farm ? farm.Name : "Unknown Farm";
   };
 
-const sortedTransactions = [...transactions].sort((a, b) => 
+const sortedTransactions = [...transactions].sort((a, b) =>
     new Date(b.date_c) - new Date(a.date_c)
   );
 
